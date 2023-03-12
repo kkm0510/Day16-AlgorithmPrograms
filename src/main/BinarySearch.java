@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class BinarySearch {
 
-    public static boolean search(String[] arr, String word){
+    public static <T extends Comparable<T>> boolean search(T[] arr, T word){
         Arrays.sort(arr);
         int low=0, high=arr.length-1;
         while(low<=high){
             int mid=low+(high-low)/2;
-            String curr=arr[mid];
+            T curr=arr[mid];
             if(word.compareTo(curr)==0){
                 return true;
             }
