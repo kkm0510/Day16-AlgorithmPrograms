@@ -16,7 +16,7 @@ public class MergeSortTest {
         String[] arr = {"hello", "hey", "world", "this", "is", "kartikeya", "maan"};
         String[] copy = Arrays.copyOf(arr, arr.length);
         Arrays.sort(copy);
-        arr=mergeSort(arr, 0, arr.length - 1);
+        mergeSort(arr, 0, arr.length - 1);
         Assert.assertArrayEquals(copy, arr);
     }
 }
