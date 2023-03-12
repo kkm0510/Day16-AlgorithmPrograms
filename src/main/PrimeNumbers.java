@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class PrimeNumbers {
 
-    public static ArrayList<Integer> findPrimes(int start, int end){
-        ArrayList<Integer> list=new ArrayList<>();
+    static ArrayList<Integer> listOfPrimes=new ArrayList<>();
+
+    public static void findPrimes(int start, int end){
         for(int i=start; i<end; i++){
             boolean isPrime=true;
             for(int j=2; j<i; j++){
@@ -14,14 +15,13 @@ public class PrimeNumbers {
                     break;
                 }
             }
-            if(isPrime) list.add(i);
+            if(isPrime) listOfPrimes.add(i);
         }
-        return list;
     }
 
     public static void main(String[] args) {
         int start=0, end =1000;
-        ArrayList<Integer> listOfPrimes=findPrimes(start, end);
+        findPrimes(start, end);
         System.out.println(listOfPrimes);
     }
 
