@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static main.PrimeNumbers.*;
+
 public class Palindrome {
 
     static ArrayList<Integer> listOfPalindromes = new ArrayList<>();
@@ -19,9 +21,11 @@ public class Palindrome {
         return rev == num;
     }
 
-    public static void findPalindromes(ArrayList<Integer> listOfPrimes) {
-        for (Integer num : listOfPrimes) {
-            if (checkPalindrome(num)) listOfPalindromes.add(num);
+    public static void findPalindromes() {
+        for (ArrayList<Integer> anagramList : listOfAnagrams) {
+            for (int num : anagramList) {
+                if (checkPalindrome(num)) listOfPalindromes.add(num);
+            }
         }
     }
 
@@ -41,39 +45,43 @@ public class Palindrome {
         return xDigits.equals(yDigits);
     }
 
+
     public static ArrayList<Integer> findAnagrams(int index) {
         ArrayList<Integer> list = new ArrayList<>();
-        int i=index+1;
-        boolean oneMatchFound=false;
-        while(i<listOfPalindromes.size()){
-            boolean isAnagram=compareDigits(listOfPalindromes.get(index), listOfPalindromes.get(i));
-            if(isAnagram) {
-                oneMatchFound=true;
-                list.add(listOfPalindromes.get(i));
+        int i = index + 1;
+        boolean oneMatchFound = false;
+        while (i < listOfPrimes.size()) {
+            boolean isAnagram = compareDigits(listOfPrimes.get(index), listOfPrimes.get(i));
+            if (isAnagram) {
+                oneMatchFound = true;
+                list.add(listOfPrimes.get(i));
+                listOfPrimes.set(i, -1);
             }
             i++;
         }
-        if(oneMatchFound) {
-            list.add(listOfPalindromes.get(index));
+        if (oneMatchFound) {
+            list.add(listOfPrimes.get(index));
+            listOfPrimes.set(index, -1);
             return list;
         }
         return null;
     }
 
     public static void findAllAnagrams() {
-        for (int i = 0; i < listOfPalindromes.size(); i++) {
+        for (int i = 0; i < listOfPrimes.size(); i++) {
+            if (listOfPrimes.get(i) == -1) continue;
             ArrayList<Integer> smallAnagramList = findAnagrams(i);
-            if (smallAnagramList!=null) listOfAnagrams.add(smallAnagramList);
+            if (smallAnagramList != null) listOfAnagrams.add(smallAnagramList);
         }
     }
 
 
     public static void main(String[] args) {
-        PrimeNumbers.findPrimes(0, 1000);
-        findPalindromes(PrimeNumbers.listOfPrimes);
-        System.out.println(listOfPalindromes);
+        findPrimes(0, 1000);
+        System.out.println(listOfPrimes);
         findAllAnagrams();
         System.out.println(listOfAnagrams);
-
+        findPalindromes();
+        System.out.println(listOfPalindromes);
     }
 }
